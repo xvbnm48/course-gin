@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -21,6 +22,22 @@ func main() {
 		c.String(http.StatusOK, "get")
 	})
 
+	router.GET("/:id", func(c *gin.Context) {
+		id := c.Param("id")
+		c.String(http.StatusOK, "The id is %s", id)
+	})
+
+	router.POST("/path", func(c *gin.Context) {
+		id := c.DefaultQuery("id", "11")
+		fmt.Println("id:", id)
+		c.String(http.StatusOK, "The id is %s", id)
+	})
+
+	router.POST("/products/:id", func(c *gin.Context) {
+		id := c.GetHeader("id")
+		fmt.Println("id:", id)
+		c.String(http.StatusOK, "The id is %s", id)
+	})
 	log.Fatal(router.Run(address))
 
 }
