@@ -17,7 +17,7 @@ type postProduct struct {
 	Description string  `json:"description" binding:"omitempty,max=250"`
 }
 
-type product struct {
+type Product struct {
 	GUID        string  `json:"guid"`
 	Name        string  `json:"name" `
 	Price       float64 `json:"price" `
@@ -41,7 +41,7 @@ func PostProduct(db *sql.DB) gin.HandlerFunc {
 			ctx.JSON(500, res)
 			return
 		}
-		var product product
+		var product Product
 		var row = db.QueryRow("SELECT guid,name,price,description,createdAt FROM products WHERE guid=?", guid)
 
 		if err := row.Scan(&product.GUID, &product.Name, &product.Price, &product.Description, &product.CreatedAt); err != nil {
