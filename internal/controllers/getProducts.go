@@ -1,7 +1,13 @@
 package controllers
 
-import "github.com/gin-gonic/gin"
+import (
+	"database/sql"
 
-func GetProducts(c *gin.Context) {
-	c.String(200, "GetProducts")
+	"github.com/gin-gonic/gin"
+)
+
+func GetProducts(db *sql.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.String(200, "GetProducts")
+	}
 }
