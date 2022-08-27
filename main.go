@@ -23,7 +23,7 @@ func main() {
 	}
 
 	router.GET("/products", controllers.GetProducts(db))
-	router.GET("/products/:guid", controllers.GetProduct)
+	router.GET("/products/:guid", controllers.GetProduct(db))
 	router.POST("/products", controllers.PostProduct(db))
 	router.DELETE("/products/:guid", controllers.DeleteProduct)
 	router.PUT("/products/:guid", controllers.PutProducts)
